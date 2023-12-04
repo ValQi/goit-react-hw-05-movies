@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMoviesCredits } from 'api';
+import { fetchCredits } from 'api';
 import { CastList, CastItem, CastImg } from './cast.styled';
 
 export const Cast = () => {
@@ -10,7 +10,7 @@ export const Cast = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchMoviesCredits(movieID)
+    fetchCredits(movieID)
       .then(response => {
         setMovieCast(response);
       })

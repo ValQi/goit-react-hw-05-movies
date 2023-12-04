@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MovieList } from 'components';
-import { fetchMovies } from 'services/api';
+import { fetchMovies } from 'api';
 import { HomeStyled } from './home.styled';
 
 const HomePage = () => {

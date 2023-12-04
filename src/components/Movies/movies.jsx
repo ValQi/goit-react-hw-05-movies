@@ -1,7 +1,8 @@
 import { useEffect as effect, useState as state } from "react";
 import { useSearchParams as searchParamsHook } from "react-router-dom";
 import { fetchDataByQuery } from "api";
-import { MovieList, MovieSearchBar } from "components";
+import { MovieList } from "components/MovieList/movielist";
+import { MovieSearch } from "components/MovieSearchBar/moviesearchbar";
 
 const MoviesComponent = () => {
 
@@ -23,7 +24,7 @@ const MoviesComponent = () => {
 
     return (
       <>
-      <MovieSearchBar/>
+      <MovieSearch/>
       <MovieList movies={customMovieList}/>
       </>
     );

@@ -26,3 +26,5 @@ const handleSubmit = e => {
       </>
     );
   };
+
+export default MovieSearch;

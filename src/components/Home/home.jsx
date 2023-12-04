@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MovieList } from 'components';
+import { MovieList } from 'components/MovieList/movielist';
 import { fetchMovies } from 'api';
 import { HomeStyled } from './home.styled';
 

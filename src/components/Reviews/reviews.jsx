@@ -1,6 +1,6 @@
 import { useState as customState, useEffect as customEffect } from 'react';
 import { useParams as customUseParams } from 'react-router-dom';
-import { fetchMoviesReviews } from 'api';
+import { fetchReviews } from 'api';
 import { Title, Content } from './reviews.styled';
 
 export const CustomReviews = () => {
@@ -11,7 +11,7 @@ export const CustomReviews = () => {
 
   customEffect(() => {
     setCustomIsLoading(true);
-    fetchMoviesReviews(customMovieID)
+    fetchReviews(customMovieID)
       .then(response => {
         setCustomReviews(response);
       })

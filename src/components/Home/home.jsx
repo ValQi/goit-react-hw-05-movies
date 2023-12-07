@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MovieList } from 'components/MovieList/movielist';
-import { fetchMovies } from 'api';
+import MoveList from 'components/MovieList/movielist';
+import { fetchTrending } from 'api';
 import { HomeStyled } from './home.styled';
 
 const HomePage = () => {
@@ -14,7 +14,7 @@ const HomePage = () => {
 
   function getTrendingMovies() {
     setIsLoading(true);
-    fetchMovies()
+    fetchTrending()
       .then(response => {
         setMovies(response)
       })
@@ -28,7 +28,7 @@ const HomePage = () => {
     <>
       {isLoading && "Loading , please wait..."}
       <HomeStyled>Trending today</HomeStyled>
-      <MovieList movies={movies}/>
+      <MoveList movies={movies}/>
     </>
   );
 };

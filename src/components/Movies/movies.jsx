@@ -1,33 +1,36 @@
-import { useEffect as effect, useState as state } from "react";
-import { useSearchParams as searchParamsHook } from "react-router-dom";
-import { fetchDataByQuery } from "api";
-import { MovieList } from "components/MovieList/movielist";
-import MovieSearch from "components/MovieSearchBar/moviesearchbar";
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { fetchSearchMovies } from 'api';
+import MovieSearch from 'components/MovieSearchBar/moviesearchbar';
+import MoveList from 'components/MovieList/movielist';
+import { Loading } from 'components/Shared/shared.styled';
 
-const MoviesComponent = () => {
+const Movies = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const [customMovieList, setCustomMovieList] = state([]);
-  const [customSearchParams] = searchParamsHook(); 
-  const customQuery = customSearchParams.get('searchQuery');
+  const moviesName = searchParams.get('query') ?? '';
 
-  effect(() => {
-    if (!customQuery) return;
-    fetchDataByQuery(customQuery)
-      .then(response => {
-        setCustomMovieList(response);
-      })
-      .catch(error => {
-        alert('Try later');
-        console.error(error);
-      });
-  }, [customQuery]);
-
-    return (
-      <>
-      <MovieSearch/>
-      <MovieList movies={customMovieList}/>
-      </>
-    );
+  const handleOnSubmit = query => {
+    const changeParams = query !== '' ? { query } : {};
+    setSearchParams(changeParams);
   };
 
-export default MoviesComponent;
+  useEffect(() => {
+    if (!moviesName) return;
+    setLoading(true);
+
+    fetchSearchMovies(moviesName).then(setMovies).finally(setLoading(false));
+  }, [moviesName]);
+
+  return (
+    <>
+      <MovieSearch value={moviesName} onSearch={handleOnSubmit} />
+      {loading && <Loading />}
+      {movies.length > 0 && <MoveList movies={movies} />}
+    </>
+  );
+};
+
+export default Movies;

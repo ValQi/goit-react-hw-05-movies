@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchDetails } from "api";
+import { fetchMovie } from "api";
 import { Container, Img, Item, Link, LinkBack, Infobox } from "./moviedet.styled";
 
 const MovieDetailsPage = () => {
@@ -13,7 +13,7 @@ const MovieDetailsPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchDetails(movieID)
+    fetchMovie(movieID)
       .then(response => {
         setMovies(response);
       })

@@ -1,17 +1,29 @@
 import { useLocation } from 'react-router-dom';
-import { MovLink, Item } from './movielist.styled';
+import { MovLink, Item, MovList, MovImg, MovP } from './movielist.styled';
 
-export const MovieList = ({ movies }) => {
+const MoveList = ({ movies }) => {
   const location = useLocation();
+  const defaultImg =
+    'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
   return (
-    <ul>
-      {movies.map(({ id, title }) => (
-        <Item key={id}>
-          <MovLink to={`/movies/${id}`} state={{ from: location }}>
-            <p>{title}</p>
+    <MovList>
+      {movies.map(movie => (
+        <Item key={movie.id}>
+          <MovLink to={`/movies/${movie.id}`} state={{ from: location }}>
+            <MovImg
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : defaultImg
+              }
+              width={250}
+              alt="poster"
+            />
+            <MovP>{movie.title}</MovP>
           </MovLink>
         </Item>
       ))}
-    </ul>
+    </MovList>
   );
 };
+export default MoveList;
